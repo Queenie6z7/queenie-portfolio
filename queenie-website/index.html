@@ -221,13 +221,11 @@
       letter-spacing: -0.06em;
       text-transform: uppercase;
       font-weight: 800;
-      /* 修复超长词语和标题溢出屏幕的问题 */
       overflow-wrap: break-word;
       word-break: break-word;
     }
 
     h1 {
-      /* 稍微缩小最大值，防止在某些屏幕上过于庞大 */
       font-size: clamp(2.8rem, 8vw, 8.5rem);
       max-width: 100%;
     }
