@@ -3026,6 +3026,388 @@
       }
     }
 
+
+
+    /* =========================================================
+       FINAL RESPONSIVE POLISH — spacing, readability, AirPal layout, cursor trail
+       Added without changing written content or image assets.
+       ========================================================= */
+    :root {
+      --page-side-space: clamp(30px, 6.5vw, 112px);
+      --section-gap: clamp(30px, 4vw, 62px);
+      --content-gap: clamp(18px, 2.4vw, 34px);
+    }
+
+    .site-frame {
+      width: min(1280px, calc(100vw - (var(--page-side-space) * 2)));
+      margin-top: clamp(22px, 3.5vw, 48px);
+      margin-bottom: clamp(28px, 4vw, 58px);
+    }
+
+    .page.active {
+      gap: var(--section-gap);
+    }
+
+    .grid,
+    .work-cards,
+    .case-hero,
+    .case-section,
+    .other-hero,
+    .other-gallery,
+    .process-grid,
+    .before-after,
+    .horizon-grid,
+    .case-info-grid {
+      gap: var(--content-gap);
+    }
+
+    .section-pad,
+    .case-hero-title,
+    .case-hero-side,
+    .case-label,
+    .case-body,
+    .other-hero-copy,
+    .other-piece-content {
+      padding: clamp(30px, 4.2vw, 64px);
+    }
+
+    h1, h2, h3, h4,
+    .work-card h3,
+    .case-label h3,
+    .other-piece-content h3,
+    .next-case h2 {
+      text-wrap: balance;
+      word-break: normal !important;
+      overflow-wrap: normal !important;
+      hyphens: none;
+    }
+
+    .case-label h3 {
+      max-width: 13ch;
+    }
+
+    .case-hero-title h1,
+    .other-hero-copy h1 {
+      max-width: 11ch;
+    }
+
+    .case-body > p + .process-grid,
+    .case-body > p + div,
+    .case-body .process-grid + div,
+    .case-body .before-after + div,
+    .case-body .airpal-feature-grid + section {
+      margin-top: clamp(22px, 2.8vw, 42px) !important;
+    }
+
+    .case-body img,
+    .process-card img,
+    .media-banner img,
+    .case-hero-title > img,
+    .other-piece-image img,
+    .mosaic-item img {
+      display: block;
+    }
+
+    .process-card p + img,
+    .process-card .small + img,
+    .case-body p + img {
+      margin-top: clamp(14px, 1.8vw, 26px);
+    }
+
+    .process-card {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px, 1.2vw, 16px);
+    }
+
+    .process-card h4,
+    .process-card p,
+    .process-card h3 {
+      margin: 0;
+    }
+
+    .case-section {
+      grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+      align-items: stretch;
+    }
+
+    .case-label {
+      min-height: 100%;
+      justify-content: flex-start;
+      gap: clamp(18px, 2vw, 34px);
+    }
+
+    .case-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .case-info-box,
+    .process-card,
+    .skill-item,
+    .ba-card,
+    .other-piece {
+      min-width: 0;
+    }
+
+    .case-info-box span,
+    .case-info-box p,
+    .process-card p,
+    .skill-item,
+    .tag,
+    .btn,
+    .small {
+      overflow-wrap: anywhere;
+    }
+
+    /* AirPal: group images use a clear horizontal layout on desktop */
+    #case-airpal > .case-info-grid + .case-section {
+      display: block !important;
+      min-height: auto;
+    }
+
+    #case-airpal > .case-info-grid + .case-section > .panel {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(18px, 2.5vw, 34px);
+      align-items: center;
+      padding: clamp(22px, 3vw, 38px) !important;
+    }
+
+    #case-airpal > .case-info-grid + .case-section > .panel img {
+      width: 100% !important;
+      max-height: clamp(260px, 46vw, 560px) !important;
+      object-fit: contain !important;
+      margin: 0 !important;
+      background: rgba(255,255,255,0.48);
+      border: 1px solid rgba(13,14,19,0.08);
+      padding: clamp(8px, 1.2vw, 14px);
+    }
+
+    #case-airpal .case-info-grid {
+      grid-template-columns: minmax(280px, 1.35fr) repeat(3, minmax(160px, 0.72fr));
+      align-items: stretch;
+    }
+
+    /* AirPal feature cards: replace generic circles with meaningful emojis */
+    #case-airpal .airpal-feature-grid {
+      gap: clamp(14px, 1.8vw, 24px) !important;
+    }
+
+    #case-airpal .airpal-feature-grid .skill-item {
+      min-height: 132px;
+      padding: clamp(18px, 2vw, 26px);
+      font-size: clamp(0.98rem, 1.18vw, 1.22rem);
+      line-height: 1.22;
+      letter-spacing: -0.015em;
+      gap: 13px;
+      justify-content: center;
+      text-transform: none;
+      font-weight: 800;
+    }
+
+    #case-airpal .airpal-feature-grid .skill-item::before {
+      width: clamp(44px, 4vw, 56px);
+      height: clamp(44px, 4vw, 56px);
+      border: 0;
+      background: rgba(255,255,255,0.72);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.12);
+      font-size: clamp(1.55rem, 2.3vw, 2rem);
+    }
+
+    #case-airpal .airpal-feature-grid .skill-item:nth-child(1)::before { content: '🧭'; }
+    #case-airpal .airpal-feature-grid .skill-item:nth-child(2)::before { content: '⏱️'; }
+    #case-airpal .airpal-feature-grid .skill-item:nth-child(3)::before { content: '🗺️'; }
+    #case-airpal .airpal-feature-grid .skill-item:nth-child(4)::before { content: '🛂'; }
+    #case-airpal .airpal-feature-grid .skill-item:nth-child(5)::before { content: '🙋'; }
+    #case-airpal .airpal-feature-grid .skill-item:nth-child(6)::before { content: '🌐'; }
+    #case-airpal .airpal-feature-grid .skill-item:nth-child(7)::before { content: '🤝'; }
+    #case-airpal .airpal-feature-grid .skill-item:nth-child(8)::before { content: '📍'; }
+
+    #case-airpal .airpal-feature-grid + section {
+      box-shadow: none;
+      border: 1px solid rgba(13,14,19,0.10);
+    }
+
+    /* Other works: smaller preview mosaic, more breathing room between four pieces */
+    #other-works .other-hero {
+      min-height: auto;
+      grid-template-columns: minmax(300px, 0.92fr) minmax(0, 1.08fr);
+      align-items: stretch;
+    }
+
+    #other-works .other-mosaic {
+      min-height: 360px !important;
+      grid-auto-rows: minmax(82px, 1fr) !important;
+      padding: clamp(14px, 1.8vw, 24px) !important;
+      gap: clamp(8px, 1vw, 14px) !important;
+    }
+
+    #other-works .other-gallery {
+      gap: clamp(34px, 4.6vw, 72px) !important;
+    }
+
+    #other-works .other-piece {
+      min-height: auto !important;
+      grid-template-rows: minmax(260px, 0.92fr) auto !important;
+    }
+
+    #other-works .other-piece-image {
+      min-height: clamp(260px, 35vw, 440px) !important;
+    }
+
+    #other-works .other-piece-content {
+      gap: clamp(12px, 1.6vw, 22px);
+    }
+
+    /* Footer: keep a single footer and reduce visual heaviness */
+    .footer {
+      margin-top: calc(var(--section-gap) * -0.25);
+      padding: clamp(18px, 2vw, 26px) clamp(22px, 3vw, 36px);
+      border-color: rgba(13,14,19,0.10);
+      box-shadow: 0 14px 42px rgba(0,0,0,0.12);
+    }
+
+    /* Cursor: theme-colour trail, cooler but lighter over reading areas */
+    .cursor-ring {
+      border-color: rgba(0,255,181,0.82);
+      box-shadow: 0 0 18px rgba(0,255,181,0.35), 0 0 36px rgba(0,143,255,0.20);
+      mix-blend-mode: screen;
+    }
+
+    .cursor-dot {
+      background: var(--green);
+      box-shadow: 0 0 14px rgba(0,255,181,0.65);
+      mix-blend-mode: screen;
+    }
+
+    .cursor-glow {
+      background:
+        radial-gradient(circle, rgba(0,255,181,0.22), rgba(0,143,255,0.12) 46%, rgba(255,179,255,0.08) 62%, transparent 72%);
+      opacity: 0.42;
+      mix-blend-mode: screen;
+    }
+
+    .cursor-trail {
+      mix-blend-mode: screen !important;
+      will-change: transform, opacity;
+    }
+
+    body.cursor-active .cursor-ring {
+      border-color: rgba(255,179,255,0.9);
+      box-shadow: 0 0 20px rgba(255,179,255,0.42), 0 0 42px rgba(0,143,255,0.22);
+    }
+
+    @media (max-width: 1180px) {
+      :root {
+        --page-side-space: clamp(22px, 4.2vw, 56px);
+      }
+
+      .site-frame {
+        width: min(1180px, calc(100vw - (var(--page-side-space) * 2)));
+      }
+
+      #case-airpal .case-info-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .case-section {
+        grid-template-columns: minmax(260px, 0.82fr) minmax(0, 1.18fr);
+      }
+    }
+
+    @media (max-width: 920px) {
+      :root {
+        --page-side-space: clamp(16px, 4vw, 34px);
+        --section-gap: clamp(24px, 5vw, 42px);
+      }
+
+      .site-frame {
+        width: min(100vw - (var(--page-side-space) * 2), 900px);
+      }
+
+      .case-section,
+      #other-works .other-hero {
+        grid-template-columns: 1fr !important;
+      }
+
+      .case-label h3,
+      .case-hero-title h1,
+      .other-hero-copy h1 {
+        max-width: 100%;
+      }
+
+      #case-airpal > .case-info-grid + .case-section > .panel {
+        grid-template-columns: 1fr;
+      }
+
+      #case-airpal .case-info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #other-works .other-mosaic {
+        min-height: 300px !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        grid-auto-rows: 140px !important;
+      }
+
+      #other-works .mosaic-item:nth-child(n) {
+        grid-column: auto !important;
+        grid-row: auto !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --page-side-space: 12px;
+        --content-gap: 16px;
+      }
+
+      .site-frame {
+        width: calc(100vw - 24px) !important;
+        margin-top: 12px;
+      }
+
+      .section-pad,
+      .case-hero-title,
+      .case-hero-side,
+      .case-label,
+      .case-body,
+      .other-hero-copy,
+      .other-piece-content {
+        padding: clamp(22px, 6vw, 34px);
+      }
+
+      h1 { font-size: clamp(2.25rem, 11vw, 3.85rem) !important; }
+      h2 { font-size: clamp(1.85rem, 9vw, 3.15rem) !important; }
+      h3 { font-size: clamp(1.45rem, 7.2vw, 2.45rem) !important; }
+
+      .process-grid,
+      .before-after,
+      .horizon-grid,
+      .other-gallery,
+      #case-airpal .airpal-feature-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      #case-airpal .airpal-feature-grid .skill-item {
+        min-height: 106px;
+        grid-template-columns: auto 1fr;
+        justify-items: start;
+        text-align: left;
+      }
+
+      #other-works .other-mosaic {
+        grid-template-columns: 1fr !important;
+        grid-auto-rows: 180px !important;
+      }
+
+      .footer {
+        gap: 10px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -3643,7 +4025,7 @@ I am currently developing my skills in product and interaction design, with a fo
         <p class="small">Focused on the airport moments where users feel most uncertain.</p>
       </div>
       <div class="panel case-body">
-        <div class="skill-wall" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); margin-top: 0; align-items: stretch;">
+        <div class="skill-wall airpal-feature-grid" style="grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 0; align-items: stretch;">
           <div class="skill-item">Journey Guide</div>
           <div class="skill-item">Boarding Countdown</div>
           <div class="skill-item">Step-by-step Navigation</div>
@@ -3871,12 +4253,6 @@ I am currently developing my skills in product and interaction design, with a fo
     </a>
    </div>
 
-  <footer class="footer">
-      <span>© 2026 [Queenie Liu]</span>
-      <span>Interaction Design Portfolio · Built with HTML / CSS / JS</span>
-      <a class="magnetic" href="#top" style="color: var(--black); text-decoration: none;">Back to top ↑</a>
-    </footer>
-
   </main>
 
   <script>
@@ -3921,20 +4297,22 @@ I am currently developing my skills in product and interaction design, with a fo
       const glow = document.querySelector('.cursor-glow');
       const body = document.body;
 
-      const trailCount = 10;
+      const trailCount = 14;
       const trails = [];
-      const colors = ['#008FFF', '#FFB3FF', '#FF537A', '#FFFFB5', '#00FFB5', '#FFFFFF'];
+      const colors = ['#008FFF', '#00FFB5', '#FFB3FF', '#FF537A', '#FFFFB5', '#FFFFFF'];
 
       for (let i = 0; i < trailCount; i++) {
         const t = document.createElement('div');
         t.className = 'cursor-trail';
         t.style.cssText = `
           position:fixed; top:0; left:0; pointer-events:none; z-index:9999;
-          transform:translate(-50%,-50%); mix-blend-mode:difference;
+          transform:translate(-50%,-50%); mix-blend-mode:screen;
           border-radius:50%;
           background:${colors[i % colors.length]};
-          width:${22 - i * 1.4}px; height:${22 - i * 1.4}px;
-          opacity:${0.5 - i * 0.04};
+          width:${28 - i * 1.65}px; height:${28 - i * 1.65}px;
+          opacity:${0.46 - i * 0.034};
+          filter: blur(${0.2 + i * 0.09}px);
+          box-shadow:0 0 ${22 - i}px ${colors[i % colors.length]};
         `;
         document.body.appendChild(t);
         trails.push({ el: t, x: window.innerWidth / 2, y: window.innerHeight / 2 });
