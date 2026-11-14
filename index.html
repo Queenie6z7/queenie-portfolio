@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Welcome to Queenie's portfolio website!" />
+  <meta name="theme-color" content="#000000" />
+  <title>[QUEENIE] — Interaction Design Portfolio</title>
+  <link rel="icon" href="images/logo-mark.webp" />
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-booting">
+
+  <!-- ============ BOOT SEQUENCE ============ -->
+  <div id="boot" class="boot" role="dialog" aria-label="Start screen">
+    <pre class="boot-log" id="bootLog" aria-hidden="true"></pre>
+    <div class="boot-title" aria-hidden="true">QUEENIE</div>
+    <button class="boot-start" id="bootStart" type="button">Press start</button>
+    <button class="boot-skip" id="bootSkip" type="button">Skip intro</button>
+  </div>
+
+  <!-- ============ CURSOR ============ -->
+  <div class="reticle" id="reticle" aria-hidden="true">
+    <i class="reticle-ring"></i><i class="reticle-dot"></i><span class="reticle-label" id="reticleLabel"></span>
+  </div>
+
+  <!-- ============ HUD ============ -->
+  <header class="hud hud-tl">
+    <a class="hud-player" href="#top" data-cursor="Home" aria-label="Queenie Liu — back to home">
+      <img src="images/logo-mark.webp" alt="Queenie Liu portfolio logo">
+      <span class="hud-player-meta">
+        <b>Queenie</b>
+        <span>LV <i id="hudLevel">01</i></span>
+      </span>
+    </a>
+    <div class="hud-xp" aria-hidden="true"><i id="hudXp"></i></div>
+  </header>
+
+  <nav class="hud hud-tr" id="hudMap" aria-label="Main navigation">
+    <button class="hud-map-toggle" id="mapToggle" type="button" aria-expanded="false" aria-controls="mapList">Map</button>
+    <ol class="hud-map" id="mapList">
+      <li><a href="#top" data-spy="top"><i></i>Start</a></li>
+      <li><a href="#skills" data-spy="skills"><i></i>Skills</a></li>
+      <li><a href="#about" data-spy="about"><i></i>Position</a></li>
+      <li><a href="#work" data-spy="work"><i></i>Case Study</a></li>
+      <li><a href="#other-works" data-spy="other-works"><i></i>Other Works</a></li>
+      <li><a href="#contact" data-spy="contact"><i></i>Contact</a></li>
+    </ol>
+  </nav>
+
+  <div class="hud hud-bl" aria-live="polite">
+    <span class="hud-quest-label">Quest</span>
+    <span class="hud-quest" id="hudQuest">Explore the portfolio</span>
+  </div>
+
+  <div class="hud hud-br">
+    <span class="hud-coords" id="hudCoords" aria-hidden="true">X 000 / Y 000</span>
+    <button class="hud-btn" id="soundToggle" type="button" aria-pressed="false" data-cursor="Sound">Sound off</button>
+    <button class="hud-btn" id="trophyToggle" type="button" aria-expanded="false" aria-controls="trophyPanel" data-cursor="Trophies">
+      Trophies <i id="trophyCount">0/12</i>
+    </button>
+  </div>
+
+  <aside class="trophies" id="trophyPanel" hidden aria-label="Achievements">
+    <header><h2>Achievements</h2><button type="button" id="trophyClose" aria-label="Close achievements">Close</button></header>
+    <ul id="trophyList"></ul>
+    <button type="button" class="trophy-reset" id="trophyReset">Reset progress</button>
+  </aside>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+
+  <!-- ============ HOME ============ -->
+  <main id="home-page" class="page is-active">
+
+    <!-- HERO -->
+    <section class="hero" id="top" data-quest="Stir the liquid metal">
+      <canvas class="hero-blob" id="blob" aria-hidden="true"></canvas>
+      <div class="hero-word" id="heroWord" aria-hidden="true">
+        <span>Q</span><span>U</span><span>E</span><span>E</span><span>N</span><span>I</span><span>E</span>
+      </div>
+      <div class="hero-readout" aria-hidden="true">
+        <span>Portfolio / 2026</span>
+        <span>Interaction Design / Sydney</span>
+      </div>
+      <div class="hero-copy">
+        <h1>Hi, I'm Queenie — I turn new ideas into new improvements.</h1>
+        <p>I work across interface design and front-end prototyping, with a focus on reducing uncertainty in digital, physical and service experiences.</p>
+        <div class="hero-actions">
+          <a class="btn btn-lime" href="#work" data-cursor="Go">View Work</a>
+          <a class="btn" href="#contact" data-cursor="Go">Contact Me</a>
+          <a class="btn" href="CV.pdf" target="_blank" rel="noreferrer" data-cursor="Open">View / Download CV</a>
+        </div>
+      </div>
+      <div class="hero-hint" aria-hidden="true">Move to stir · scroll to explore</div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track" id="marquee">
+        <span>New Idea → New Change → New Improve →&nbsp;</span>
+        <span>New Idea → New Change → New Improve →&nbsp;</span>
+        <span>New Idea → New Change → New Improve →&nbsp;</span>
+        <span>New Idea → New Change → New Improve →&nbsp;</span>
+      </div>
+    </div>
+
+    <!-- SKILL TREE -->
+    <section class="section skills" id="skills" data-quest="Unlock the skill tree">
+      <header class="section-head">
+        <p class="kicker">Skills And Tools</p>
+        <h2 class="warp" data-warp>My Design Toolkit</h2>
+      </header>
+      <div class="tree" id="tree">
+        <svg class="tree-lines" id="treeLines" aria-hidden="true"></svg>
+        <div class="tree-root" data-node="root"><img src="images/logo-mark.webp" alt=""><span>Queenie</span></div>
+        <ul class="tree-nodes">
+          <li class="node c-lime"   data-node data-parent="root" style="--x:16;--y:20"><button type="button" data-cursor="Skill">Wireframe</button></li>
+          <li class="node c-lime"   data-node data-parent="root" style="--x:12;--y:54"><button type="button" data-cursor="Skill">Figma</button></li>
+          <li class="node c-lime"   data-node data-parent="root" style="--x:22;--y:86"><button type="button" data-cursor="Skill">Visual Systems</button></li>
+          <li class="node c-cyan"   data-node data-parent="root" style="--x:50;--y:90"><button type="button" data-cursor="Skill">HTML / CSS</button></li>
+          <li class="node c-pink"   data-node data-parent="root" style="--x:80;--y:84"><button type="button" data-cursor="Skill">Interdisciplinary</button></li>
+          <li class="node c-pink"   data-node data-parent="root" style="--x:88;--y:50"><button type="button" data-cursor="Skill">Bilingual</button></li>
+          <li class="node c-pink"   data-node data-parent="root" style="--x:82;--y:18"><button type="button" data-cursor="Skill">Teamwork</button></li>
+        </ul>
+        <p class="tree-status" id="treeStatus" aria-live="polite">0 / 7 unlocked</p>
+      </div>
+    </section>
+
+    <!-- CHARACTER FILE -->
+    <section class="section about" id="about" data-quest="Read the character file">
+      <header class="section-head">
+        <p class="kicker">Position Statement</p>
+        <h2 class="warp" data-warp>About Me</h2>
+      </header>
+      <div class="dossier">
+        <figure class="dossier-portrait">
+          <div class="portrait-frame">
+            <img src="images/me.webp" alt="Portrait photo of Queenie Liu" loading="lazy">
+            <i class="scanline" aria-hidden="true"></i>
+          </div>
+          <figcaption>Queenie / Interaction Design / Sydney</figcaption>
+        </figure>
+        <div class="dossier-body">
+          <dl class="dossier-stats">
+            <div><dt>Name</dt><dd>Ziqi Liu “Queenie”</dd></div>
+            <div><dt>Class</dt><dd>Interaction Design</dd></div>
+            <div><dt>Base</dt><dd>Sydney, Australia</dd></div>
+          </dl>
+          <div class="dossier-bio" id="bio">
+            <p>Hi, my name is Ziqi Liu, and you can call me Queenie. I am a Sydney-based interaction design student who enjoys turning new ideas into clear and visually engaging digital experiences.</p>
+            <p>My practice sits between user research, prototyping, and visual storytelling. I am interested in everyday technologies — from health and travel tools — and how design can make them feel more understandable, supportive, and human.</p>
+            <p>With a background that bridges media, communication, and interaction design, I care not only about how a product looks, but also how it speaks, behaves, and guides people through an experience.</p>
+            <p>I am currently developing my skills in product and interaction design, with a focus on usability, and the connection between technology and visual craft.</p>
+          </div>
+          <ul class="tags">
+            <li>Interaction Design</li><li>UX Research</li><li>Prototyping</li><li>Web Design</li><li>Accessible Interfaces</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Replaces the old "Design Philosophy" block: results pulled from the CV -->
+      <div class="record">
+        <h3>Track record</h3>
+        <ul>
+          <li><b>Top 10%</b><span>GPA 3.6 in Interaction Design, The University of Sydney, Feb 2025 – present</span></li>
+          <li><b>+30%</b><span>Task completion rate after user testing on MedEasy</span></li>
+          <li><b>72.5</b><span>SUS usability score for AirPal after iteration and testing</span></li>
+          <li><b>HD</b><span>High Distinction for code quality on Waverley Cemetery by the Sea, a responsive website I led the front-end for</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- MISSION SELECT -->
+    <section class="section work" id="work" data-quest="Drag the stage and pick a mission">
+      <header class="section-head">
+        <p class="kicker">Selected Work</p>
+        <h2 class="warp" data-warp>Case Studies</h2>
+        <p class="lede">Two selected projects showing how I approach interaction design across accessible digital products and physical-digital service experiences.</p>
+      </header>
+
+      <div class="stage" id="stage" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Case studies. Use left and right arrow keys to rotate.">
+        <div class="stage-floor" aria-hidden="true"></div>
+        <div class="stage-ring" id="ring">
+          <a class="cart c-lime" href="#medeasy" data-index="0" data-cursor="Drag">
+            <span class="cart-label">Case Study 01</span>
+            <img class="cart-art" src="images/MedEasy-hold.webp" alt="" loading="lazy">
+            <img class="cart-shot" src="images/MedEasy-title.webp" alt="MedEasy title" loading="lazy">
+            <strong>MedEasy</strong>
+          </a>
+          <a class="cart c-cyan" href="#airpal" data-index="1" data-cursor="Drag">
+            <span class="cart-label">Case Study 02</span>
+            <img class="cart-art" src="images/Airpal-prototype.webp" alt="" loading="lazy">
+            <img class="cart-shot" src="images/AirPal-title.webp" alt="AirPal title" loading="lazy">
+            <strong>AirPal</strong>
+          </a>
+          <a class="cart c-pink" href="#other-works" data-index="2" data-cursor="Drag">
+            <span class="cart-label">Selected Work 03</span>
+            <img class="cart-shot cart-shot-full" src="images/other-title.webp" alt="other title" loading="lazy">
+            <strong>Other Works</strong>
+          </a>
+        </div>
+        <button class="stage-arrow stage-prev" id="stagePrev" type="button" aria-label="Previous project" data-cursor="Prev">←</button>
+        <button class="stage-arrow stage-next" id="stageNext" type="button" aria-label="Next project" data-cursor="Next">→</button>
+      </div>
+
+      <div class="brief" id="brief" aria-live="polite">
+        <article class="brief-item c-lime is-current" data-index="0">
+          <h3>MedEasy</h3>
+          <p class="brief-role">UI / UX Design</p>
+          <ul class="tags"><li>Health Interface</li><li>Older Adults</li><li>Usability Testing</li><li>Iteration</li></ul>
+          <a class="btn btn-fill" href="#medeasy" data-cursor="Start">Start mission</a>
+        </article>
+        <article class="brief-item c-cyan" data-index="1">
+          <h3>AirPal</h3>
+          <p class="brief-role">Product / Interface Design</p>
+          <ul class="tags"><li>Travel Context</li><li>Physical-Digital</li><li>Scenario Design</li><li>Interface Prompts</li></ul>
+          <a class="btn btn-fill" href="#airpal" data-cursor="Start">Start mission</a>
+        </article>
+        <article class="brief-item c-pink" data-index="2">
+          <h3>Other Works</h3>
+          <p class="brief-role">Some of my drawing works, including ink portraits, colour studies, anatomy-inspired drawing and charcoal texture work.</p>
+          <ul class="tags"><li>Visual Practice</li><li>Drawing</li><li>Material Exploration</li><li>Personal Style</li></ul>
+          <a class="btn btn-fill" href="#other-works" data-cursor="Go">Open the canvas</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- FREE CANVAS -->
+    <section class="section other" id="other-works" data-quest="Throw the drawings around">
+      <header class="section-head">
+        <p class="kicker">Other Works / 2026</p>
+        <h2 class="warp" data-warp>Visual Experiments</h2>
+        <p class="lede">These works show the more expressive side of my design practice: observation, material testing and emotional image-making.</p>
+        <ul class="tags"><li>Ink</li><li>Pastel</li><li>Charcoal</li><li>Visual Storytelling</li></ul>
+      </header>
+
+      <div class="board-wrap">
+        <div class="board-tools">
+          <span>Drag to move · click to inspect</span>
+          <button type="button" class="hud-btn" id="boardShuffle" data-cursor="Mess">Shuffle</button>
+          <button type="button" class="hud-btn" id="boardTidy" data-cursor="Tidy">Tidy up</button>
+        </div>
+        <div class="board" id="board">
+          <figure class="piece" data-piece="0" tabindex="0" data-cursor="Drag">
+            <img src="images/other1.webp" alt="Monochrome ink portrait studies" draggable="false" loading="lazy">
+            <figcaption>
+              <span class="piece-meta"><span>2026</span><span>Ink Study</span><span>Portrait</span></span>
+              <h3>Fluid Portrait Studies</h3>
+              <p>Exploring identity through loose brush marks, layered faces and imperfect emotional expression.</p>
+            </figcaption>
+          </figure>
+          <figure class="piece" data-piece="1" tabindex="0" data-cursor="Drag">
+            <img src="images/other2.webp" alt="Abstract colour study with organic overlapping shapes" draggable="false" loading="lazy">
+            <figcaption>
+              <span class="piece-meta"><span>2026</span><span>Colour</span><span>Organic Form</span></span>
+              <h3>Organic Colour Study</h3>
+              <p>Testing soft colour transitions, curved forms and the tension between delicate surfaces and strong outlines.</p>
+            </figcaption>
+          </figure>
+          <figure class="piece" data-piece="2" tabindex="0" data-cursor="Drag">
+            <img src="images/other3.webp" alt="Brain pathway illustration on black background" draggable="false" loading="lazy">
+            <figcaption>
+              <span class="piece-meta"><span>2026</span><span>Chalk</span><span>Body / Mind</span></span>
+              <h3>Inside The Mind</h3>
+              <p>A large-scale drawing visualising internal signals, stress and thought pathways through red and blue movement lines.</p>
+            </figcaption>
+          </figure>
+          <figure class="piece" data-piece="3" tabindex="0" data-cursor="Drag">
+            <img src="images/other4.webp" alt="Charcoal drawing of hands against a textured architectural background" draggable="false" loading="lazy">
+            <figcaption>
+              <span class="piece-meta"><span>2026</span><span>Charcoal</span><span>Texture</span></span>
+              <h3>Touch And Surface</h3>
+              <p>Using hand forms and rubbed textures to study touch, spatial memory and material detail.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTINUE? -->
+    <section class="section contact" id="contact" data-quest="Send a signal">
+      <div class="continue" aria-hidden="true">
+        <span class="continue-word warp" data-warp>Continue?</span>
+        <span class="continue-count" id="countdown">9</span>
+      </div>
+      <div class="contact-body">
+        <p class="kicker">Contact / Links</p>
+        <h2>Let’s Talk About Design And Future Work.</h2>
+        <p class="lede">Open to early-career product and interaction design opportunities. Best contacted by email.</p>
+        <p class="contact-pref">Preferred Contact</p>
+        <button class="mail" id="mailCopy" type="button" data-cursor="Copy" aria-label="Copy email address 54liuzi7@gmail.com">
+          <span>54liuzi7@gmail.com</span>
+        </button>
+        <div class="hero-actions">
+          <a class="btn btn-yellow" href="mailto:54liuzi7@gmail.com" data-cursor="Mail">Email Me</a>
+          <a class="btn" href="CV.pdf" target="_blank" rel="noreferrer" data-cursor="Open">View CV</a>
+          <a class="btn" href="http://www.linkedin.com/in/ziqi-liu-queenie" target="_blank" rel="noreferrer" data-cursor="Open">LinkedIn</a>
+          <a class="btn" href="https://www.instagram.com/6zi7_queenie/" target="_blank" rel="noreferrer" data-cursor="Open">Instagram</a>
+        </div>
+        <p class="contact-loc">Sydney, Australia · 2026</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>© 2026 [Queenie Liu]</span>
+      <span>Interaction Design Portfolio · Built with HTML / CSS / JS</span>
+      <button type="button" class="coin" id="coin" data-cursor="Play">Insert coin</button>
+      <a href="#top" data-cursor="Up">Back to top ↑</a>
+    </footer>
+  </main>
+
+  <!-- ============ CASE: MEDEASY ============ -->
+  <main id="case-medeasy" class="page case c-lime" hidden>
+    <aside class="chapters" aria-label="Chapters">
+      <a class="back-link" href="#work" data-cursor="Back">← Back to Work</a>
+      <p class="chapters-title">Mission 01</p>
+      <ol></ol>
+      <div class="chapters-bar"><i></i></div>
+    </aside>
+
+    <article class="case-main">
+      <header class="case-head">
+        <p class="kicker">Case Study 01 / UX Design</p>
+        <h1 class="warp" data-warp>MedEasy</h1>
+        <p class="case-intro">A medication support app designed to help older adults with chronic conditions scan, review, edit, remind and share medication information with more confidence.</p>
+        <ul class="tags"><li>Health Interface</li><li>Older Adults</li><li>Accessibility</li><li>Usability Testing</li><li>Iteration</li></ul>
+        <img class="case-cover zoomable" src="images/MedEasy-display.webp" alt="MedEasy display overview">
+      </header>
+
+      <section class="chapter" data-chapter="Overview">
+        <p class="kicker">Overview</p>
+        <h2>Bridging the gap between elderly users and digital medication management</h2>
+        <p>MedEasy was designed through a process of secondary research, lo-fi wireframing, and iterative usability testing to reduce the cognitive load placed on older adults managing complex medication regimens.</p>
+        <dl class="specs">
+          <div><dt>Context</dt><dd>Individual Project</dd></div>
+          <div><dt>My Role</dt><dd>UX/UI Designer<small>Research, wireframing, usability testing, visual design, iteration</small></dd></div>
+          <div><dt>Timeline</dt><dd>Aug 2025 — Nov 2025</dd></div>
+          <div><dt>Tools</dt><dd>Figma, FigJam, Miro</dd></div>
+        </dl>
+      </section>
+
+      <section class="chapter" data-chapter="Challenge">
+        <p class="kicker">01 / Challenge</p>
+        <h2>Challenges</h2>
+        <div class="callout">
+          <h3>Target Users</h3>
+          <p>Older adults aged 60+ with chronic conditions. Including users with bilingual needs, low digital confidence, vision issues, or tremor</p>
+        </div>
+        <div class="cards cards-3">
+          <div class="card"><h3>01 / Reducing refill errors</h3><p>Older users may accidentally tap the wrong area or miss important details during a refill.</p></div>
+          <div class="card"><h3>02 / Making medical information understandable</h3><p>Medication names, dosage, pharmacy details, and warnings need to be clear without overwhelming the user.</p></div>
+          <div class="card"><h3>03 / Supporting different abilities and contexts</h3><p>The interface needed to work across languages, low confidence, vision changes, tremor, and unstable internet connection.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-chapter="Process">
+        <p class="kicker">02 / Process</p>
+        <h2>Design Process</h2>
+        <p>Timeline from research to iteration.</p>
+        <ol class="steps">
+          <li><h3>01 Research</h3><p>Analyze forums and communities to understand common barriers that elderly people face when using digital tools.</p></li>
+          <li><h3>02 Insights</h3><p>Core requirements: reduced steps, large-sized controls, clear language, and better feedback.</p></li>
+          <li><h3>03 Wireframes</h3><p>Create low fidelity prototypes for login, homepage, dispensing steps, reminders, and personal information.</p></li>
+          <li><h3>04 Testing</h3><p>Remote verbal thinking test with four participants（Think-aloud sessions）</p></li>
+          <li><h3>05 Iteration</h3><p>Simplify visual guidance, reminder location, and offline feedback based on user behavior.</p></li>
+        </ol>
+        <figure class="shot"><figcaption>User Flow</figcaption><img class="zoomable" src="images/MedEasy-userflow.webp" alt="MedEasy user flow" loading="lazy"></figure>
+        <figure class="shot"><img class="zoomable" src="images/MedEasy-wireframe1.webp" alt="MedEasy wireframe1" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Features">
+        <p class="kicker">03 / Features</p>
+        <h2>Key Features</h2>
+        <ul class="chips">
+          <li>3-Step Refill: scan, confirm, send.</li><li>Bilingual Toggle</li><li>Read-Aloud &amp; Voice Input</li><li>Large Touch Targets</li><li>Offline Retry</li>
+        </ul>
+        <figure class="shot"><figcaption>UI Prototype Details</figcaption><img class="zoomable" src="images/MedEasy-ui.webp" alt="MedEasy ui display" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Iteration">
+        <p class="kicker">04 / Iteration</p>
+        <h2>What I Changed</h2>
+        <p>Before → After</p>
+        <div class="versus">
+          <div class="versus-col is-before">
+            <h3>Before</h3>
+            <ul><li>✕ Unclear starting point</li><li>✕ Icon-only navigation (hard to understand)</li><li>✕ Reminder actions were missed</li><li>✕ Small reminder pickers</li></ul>
+            <img class="zoomable" src="images/MedEasy-before.webp" alt="MedEasy before change" loading="lazy">
+          </div>
+          <div class="versus-col is-after">
+            <h3>After</h3>
+            <ul><li>✓ Clear "Tap to scan" cue</li><li>✓ Icon + text navigation</li><li>✓ Reminder/Calendar moved closer to success message</li><li>✓ Larger date/time controls</li></ul>
+            <img class="zoomable" src="images/MedEasy-after.webp" alt="MedEasy after change" loading="lazy">
+          </div>
+        </div>
+      </section>
+
+      <section class="chapter" data-chapter="Reflection">
+        <p class="kicker">05 / Reflection</p>
+        <h2>Learnings</h2>
+        <p class="pull">Small details such as labels, feedback, touch size, and action placement can strongly affect whether older users feel safe continuing a task.</p>
+        <p>This project helped me understand that accessibility is not only about adding features, but about reducing uncertainty at each step. For older adults, a successful interface needs to feel predictable, forgiving, and respectful. My biggest design decision was to make the refill process narrower, not broader: fewer steps, clearer actions, and stronger feedback.</p>
+      </section>
+
+      <a class="next-case c-cyan" href="#airpal" data-cursor="Next">
+        <span>Next Case Study</span>
+        <strong class="warp" data-warp>AirPal</strong>
+        <p>Physical-digital airport companion →</p>
+      </a>
+    </article>
+  </main>
+
+  <!-- ============ CASE: AIRPAL ============ -->
+  <main id="case-airpal" class="page case c-cyan" hidden>
+    <aside class="chapters" aria-label="Chapters">
+      <a class="back-link" href="#work" data-cursor="Back">← Back to Work</a>
+      <p class="chapters-title">Mission 02</p>
+      <ol></ol>
+      <div class="chapters-bar"><i></i></div>
+    </aside>
+
+    <article class="case-main">
+      <header class="case-head">
+        <p class="kicker">Case Study 02 / Group Project</p>
+        <h1 class="warp" data-warp>AirPal</h1>
+        <p class="case-intro">AirPal is a wearable airport companion for first-time solo travellers. It combines quick-access storage, a foldable screen, real-time guidance and support access to make airport journeys clearer and less stressful.</p>
+        <ul class="tags"><li>Physical-Digital</li><li>Travel UX</li><li>Concept Design</li><li>User Testing</li></ul>
+        <img class="case-cover zoomable" src="images/AirPal-title.webp" alt="AirPal case study title">
+      </header>
+
+      <section class="chapter" data-chapter="Overview">
+        <dl class="specs">
+          <div class="specs-wide"><dt>My Role</dt><dd>Physical-digital interaction designer<small>I contributed to concept development, physical form decisions and testing interpretation. My strongest contribution was connecting the wearable bag form with the on-screen guidance system, so AirPal felt like support within an airport journey rather than just a screen attached to a product.</small></dd></div>
+          <div><dt>Team Context</dt><dd>Group project with Cassie Xu and Henry Fried</dd></div>
+          <div><dt>Timeline</dt><dd>Mar–May 2026</dd></div>
+          <div><dt>Tools &amp; Methods</dt><dd>Sketching, Blender, physical mock-up, storyboard, role-play testing, SUS, interview feedback</dd></div>
+        </dl>
+        <div class="pair">
+          <img class="zoomable" src="images/AirPal-beforetest.webp" alt="AirPal before test" loading="lazy">
+          <img class="zoomable" src="images/AirPal-mygroup.webp" alt="My group photo" loading="lazy">
+        </div>
+      </section>
+
+      <section class="chapter" data-chapter="My contribution">
+        <p class="kicker">00 / My Contribution</p>
+        <h2>What I Personally Did</h2>
+        <div class="cards cards-3">
+          <div class="card"><h3>01 / Concept Direction</h3><p>Helped shape AirPal as a wearable crossbody bag instead of only a screen-based apps.</p></div>
+          <div class="card"><h3>02 / Physical Prototype Thinking</h3><p>Explored the waist bag form, 90° foldable screen, quick-access storage, and light/vibration alerts through sketches and product-detail thinking.</p></div>
+          <div class="card"><h3>03 / Testing Reflection</h3><p>Helped interpret testing feedback.</p></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-chapter="Problem">
+        <p class="kicker">01 / Problem</p>
+        <h2>Why AirPal?</h2>
+        <p class="pull">First-time solo travel is not only about finding information. It is about knowing what to do next.</p>
+        <p>Airports can overwhelm first-time solo travellers with unfamiliar layouts, time pressure, security rules, gate changes and limited support. Our design challenge was to reduce uncertainty by making the next action visible, simple and reassuring.</p>
+        <div class="cards cards-3 cards-emoji">
+          <div class="card"><span aria-hidden="true">🔊</span><h3>Cognitive Overload</h3></div>
+          <div class="card"><span aria-hidden="true">🤔️</span><h3>Unfamiliar Navigation</h3></div>
+          <div class="card"><span aria-hidden="true">😔</span><h3>Lack of Support</h3></div>
+        </div>
+        <figure class="shot"><img class="zoomable" src="images/AirPal-storyboard.webp" alt="AirPal storyboard sketch" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Concept">
+        <p class="kicker">02 / Concept</p>
+        <h2>Wearable Airport Companion</h2>
+        <p class="pull">A physical-digital solution, not just another phone interface.</p>
+        <p>AirPal is a crossbody / waist bag with a foldable glanceable screen. It keeps passports, boarding passes, cards and phones close, while providing journey guidance, flight updates, navigation prompts and support options.</p>
+        <div class="cards cards-3">
+          <div class="card"><h3>Secure Storage</h3><p>Keeps key travel items easy to reach during security and boarding.</p></div>
+          <div class="card"><h3>90° Foldable Screen</h3><p>Allows glanceable viewing while walking, standing or waiting.</p></div>
+          <div class="card"><h3>Multimodal Alerts</h3><p>Uses light, vibration and audio to notify users in noisy airport environments.</p></div>
+        </div>
+        <figure class="shot"><img class="zoomable" src="images/AirPal-draft.webp" alt="AirPal wearable bag concept sketch" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Solution">
+        <p class="kicker">03 / Solution</p>
+        <h2>What AirPal Delivers</h2>
+        <p>Focused on the airport moments where users feel most uncertain.</p>
+        <ul class="chips chips-emoji">
+          <li><span aria-hidden="true">🧭</span>Journey Guide</li>
+          <li><span aria-hidden="true">⏱️</span>Boarding Countdown</li>
+          <li><span aria-hidden="true">🗺️</span>Step-by-step Navigation</li>
+          <li><span aria-hidden="true">🛂</span>Passport Status Alert</li>
+          <li><span aria-hidden="true">🙋</span>Staff Help</li>
+          <li><span aria-hidden="true">🌐</span>Translation</li>
+          <li><span aria-hidden="true">🤝</span>Peer Support</li>
+          <li><span aria-hidden="true">📍</span>Progress Indicator</li>
+        </ul>
+        <figure class="shot"><figcaption>Prototype Detail</figcaption><img class="zoomable" src="images/AirPal-prototypedetail.webp" alt="AirPal prototype details" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Testing">
+        <p class="kicker">04 / Testing</p>
+        <h2>How We Tested It</h2>
+        <p class="pull">Scenario-based testing helped us see how users acted under pressure.</p>
+        <p>We tested AirPal with 5 proxy users in a busy user testing fair environment. The methods included think-aloud, role-play tasks, SUS survey and short interviews.</p>
+        <div class="cards cards-3">
+          <div class="card"><h3>Task 1 / Security Check</h3><p>Users followed on-screen guidance to remove the correct items under time pressure.</p></div>
+          <div class="card"><h3>Task 2 / Gate Navigation</h3><p>Users followed instructions to reach the boarding gate, but distance-only directions were confusing.</p></div>
+          <div class="card"><h3>Task 3 / Passport Lost</h3><p>Users responded quickly to the alert and chose support options to solve the problem.</p></div>
+        </div>
+        <div class="result">
+          <div class="result-score">
+            <h3>SUS Result</h3>
+            <b>72.5</b>
+            <p>Good overall usability, with room to simplify navigation and menus.</p>
+          </div>
+          <img class="zoomable" src="images/AirPal-testresult.webp" alt="AirPal SUS result graphic" loading="lazy">
+          <div class="result-insight">
+            <h3>Testing Insight</h3>
+            <ul>
+              <li>Insight 1 — Navigation needed landmarks</li>
+              <li>Insight 2 — Support needed to be visible earlier</li>
+              <li>Insight 3 — The interface needed stronger hierarchy</li>
+            </ul>
+          </div>
+        </div>
+        <figure class="shot"><figcaption>User Testing Photos</figcaption><img class="zoomable" src="images/Airpal-usertest.webp" alt="AirPal prototype user testing" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Iteration">
+        <p class="kicker">05 / Interface Iteration</p>
+        <h2>What Changed</h2>
+        <p>From messy screens to clearer guidance.</p>
+        <div class="versus">
+          <div class="versus-col is-before">
+            <h3>Before</h3>
+            <ul><li>✕ Too much information in one screen</li><li>✕ Support was less visible</li><li>✕ Direction steps were too long</li><li>✕ Users could lose track of current progress</li></ul>
+          </div>
+          <div class="versus-col is-after">
+            <h3>After</h3>
+            <ul><li>✓ Divided interface into Journey, Navigation and Support</li><li>✓ Made staff help, translation and peer support easier to access</li><li>✓ Simplified directions into shorter steps</li><li>✓ Added progress indicators to show current stage</li></ul>
+          </div>
+        </div>
+        <figure class="shot"><figcaption>Interface Iteration Evidence</figcaption><img class="zoomable" src="images/AirPal-uiiteration.webp" alt="AirPal interface iteration" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Next steps">
+        <p class="kicker">06 / Future Direction</p>
+        <h2>Next Improvements</h2>
+        <p>What I would improve if the project continued.</p>
+        <div class="cards cards-3 cards-media">
+          <div class="card"><h3>Contextual Navigation</h3><p>Use landmarks like “towards Starbucks” instead of only metres and arrows.</p><img class="zoomable" src="images/AirPal-finalui1.webp" alt="AirPal final ui 1" loading="lazy"></div>
+          <div class="card"><h3>Simpler Menu Hierarchy</h3><p>Group functions into Journey, Navigation and Support to reduce decision-making pressure.</p><img class="zoomable" src="images/AirPal-finalui2.webp" alt="AirPal final ui 2" loading="lazy"></div>
+          <div class="card"><h3>Emotional Support</h3><p>Add calming materials, friendly feedback and small rewards to make the journey feel less stressful.</p><img class="zoomable" src="images/AirPal-sticker.webp" alt="AirPal sticker iteration" loading="lazy"></div>
+        </div>
+      </section>
+
+      <section class="chapter" data-chapter="Reflection">
+        <p class="kicker">07 / Reflection</p>
+        <h2>What I Learned</h2>
+        <p class="pull">Useful design is not about adding more functions. It is about making the next step clearer.</p>
+        <p>AirPal helped me understand how physical form and interface design need to work together. My key learning was that in stressful environments, a product should reduce choices, guide one action at a time, and provide reassurance before users feel lost.</p>
+      </section>
+
+      <a class="next-case c-pink" href="#other-works" data-cursor="Next">
+        <span>Next / More Work</span>
+        <strong class="warp" data-warp>Other Works</strong>
+        <p>2026 visual experiments and personal practice →</p>
+      </a>
+    </article>
+  </main>
+
+  <!-- ============ LIGHTBOX ============ -->
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image viewer">
+    <button type="button" class="lightbox-close" id="lightboxClose" data-cursor="Close">Close</button>
+    <img id="lightboxImg" alt="">
+    <div class="lightbox-info" id="lightboxInfo"></div>
+  </div>
+
+  <!-- ============ MINI GAME ============ -->
+  <div class="arcade" id="arcade" hidden role="dialog" aria-modal="true" aria-label="Mini game: Idea Catcher">
+    <div class="arcade-box">
+      <header>
+        <strong>Idea Catcher</strong>
+        <span>Score <b id="arcadeScore">0</b></span>
+        <span>Time <b id="arcadeTime">30</b></span>
+        <button type="button" id="arcadeClose" data-cursor="Quit">Quit</button>
+      </header>
+      <canvas id="arcadeCanvas" width="560" height="380"></canvas>
+      <p id="arcadeMsg">Move the mouse or use ← → to catch new ideas. Avoid the red bugs.</p>
+      <button type="button" class="btn btn-lime" id="arcadePlay">Play</button>
+    </div>
+  </div>
+
+  <div class="glitch-wipe" id="wipe" aria-hidden="true"></div>
+
+  <script src="js/blob.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
