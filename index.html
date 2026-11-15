@@ -9,89 +9,49 @@
   <link rel="icon" href="images/logo-mark.webp" />
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="is-booting">
+<body class="is-loading">
 
-  <!-- ============ BOOT SEQUENCE ============ -->
-  <div id="boot" class="boot" role="dialog" aria-label="Start screen">
-    <pre class="boot-log" id="bootLog" aria-hidden="true"></pre>
-    <div class="boot-title" aria-hidden="true">QUEENIE</div>
-    <button class="boot-start" id="bootStart" type="button">Press start</button>
-    <button class="boot-skip" id="bootSkip" type="button">Skip intro</button>
+  <!-- ============ PRELOADER ============ -->
+  <div id="loader" class="loader" aria-hidden="true">
+    <span class="loader-num" id="loaderNum">0</span>
+    <span class="loader-name">Queenie Liu<br>Portfolio 2026</span>
   </div>
 
-  <!-- ============ CURSOR ============ -->
-  <div class="reticle" id="reticle" aria-hidden="true">
-    <i class="reticle-ring"></i><i class="reticle-dot"></i><span class="reticle-label" id="reticleLabel"></span>
-  </div>
+  <!-- the shape-shifting metal lives behind every section of the home page -->
+  <canvas class="metal" id="metal" aria-hidden="true"></canvas>
 
-  <!-- ============ HUD ============ -->
-  <header class="hud hud-tl">
-    <a class="hud-player" href="#top" data-cursor="Home" aria-label="Queenie Liu — back to home">
+  <div class="cursor" id="cursor" aria-hidden="true"><i></i><span id="cursorLabel"></span></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav">
+    <a class="nav-logo" href="#top" aria-label="Queenie Liu, back to top">
       <img src="images/logo-mark.webp" alt="Queenie Liu portfolio logo">
-      <span class="hud-player-meta">
-        <b>Queenie</b>
-        <span>LV <i id="hudLevel">01</i></span>
-      </span>
+      <span>Queenie Liu</span>
     </a>
-    <div class="hud-xp" aria-hidden="true"><i id="hudXp"></i></div>
+    <nav aria-label="Main navigation">
+      <a href="#work" data-spy="work">Work</a>
+      <a href="#about" data-spy="about">About</a>
+      <a href="#contact" data-spy="contact">Contact</a>
+      <a class="nav-cv" href="CV.pdf" target="_blank" rel="noreferrer">CV</a>
+    </nav>
   </header>
-
-  <nav class="hud hud-tr" id="hudMap" aria-label="Main navigation">
-    <button class="hud-map-toggle" id="mapToggle" type="button" aria-expanded="false" aria-controls="mapList">Map</button>
-    <ol class="hud-map" id="mapList">
-      <li><a href="#top" data-spy="top"><i></i>Start</a></li>
-      <li><a href="#skills" data-spy="skills"><i></i>Skills</a></li>
-      <li><a href="#about" data-spy="about"><i></i>Position</a></li>
-      <li><a href="#work" data-spy="work"><i></i>Case Study</a></li>
-      <li><a href="#other-works" data-spy="other-works"><i></i>Other Works</a></li>
-      <li><a href="#contact" data-spy="contact"><i></i>Contact</a></li>
-    </ol>
-  </nav>
-
-  <div class="hud hud-bl" aria-live="polite">
-    <span class="hud-quest-label">Quest</span>
-    <span class="hud-quest" id="hudQuest">Explore the portfolio</span>
-  </div>
-
-  <div class="hud hud-br">
-    <span class="hud-coords" id="hudCoords" aria-hidden="true">X 000 / Y 000</span>
-    <button class="hud-btn" id="soundToggle" type="button" aria-pressed="false" data-cursor="Sound">Sound off</button>
-    <button class="hud-btn" id="trophyToggle" type="button" aria-expanded="false" aria-controls="trophyPanel" data-cursor="Trophies">
-      Trophies <i id="trophyCount">0/12</i>
-    </button>
-  </div>
-
-  <aside class="trophies" id="trophyPanel" hidden aria-label="Achievements">
-    <header><h2>Achievements</h2><button type="button" id="trophyClose" aria-label="Close achievements">Close</button></header>
-    <ul id="trophyList"></ul>
-    <button type="button" class="trophy-reset" id="trophyReset">Reset progress</button>
-  </aside>
-
-  <div class="toasts" id="toasts" aria-live="polite"></div>
 
   <!-- ============ HOME ============ -->
   <main id="home-page" class="page is-active">
 
     <!-- HERO -->
-    <section class="hero" id="top" data-quest="Stir the liquid metal">
-      <canvas class="hero-blob" id="blob" aria-hidden="true"></canvas>
+    <section class="hero" id="top" data-shape="0" data-pos="0.42,0.3,1" data-tint="lime">
       <div class="hero-word" id="heroWord" aria-hidden="true">
         <span>Q</span><span>U</span><span>E</span><span>E</span><span>N</span><span>I</span><span>E</span>
       </div>
-      <div class="hero-readout" aria-hidden="true">
-        <span>Portfolio / 2026</span>
-        <span>Interaction Design / Sydney</span>
-      </div>
       <div class="hero-copy">
-        <h1>Hi, I'm Queenie — I turn new ideas into new improvements.</h1>
-        <p>I work across interface design and front-end prototyping, with a focus on reducing uncertainty in digital, physical and service experiences.</p>
+        <p class="tag">interaction designer, Sydney</p>
+        <h1>I turn new ideas into new improvements.</h1>
         <div class="hero-actions">
-          <a class="btn btn-lime" href="#work" data-cursor="Go">View Work</a>
-          <a class="btn" href="#contact" data-cursor="Go">Contact Me</a>
-          <a class="btn" href="CV.pdf" target="_blank" rel="noreferrer" data-cursor="Open">View / Download CV</a>
+          <a class="btn btn-fill" href="#work" data-cursor="Go">See my work</a>
+          <a class="link" href="CV.pdf" target="_blank" rel="noreferrer">Download CV</a>
         </div>
       </div>
-      <div class="hero-hint" aria-hidden="true">Move to stir · scroll to explore</div>
     </section>
 
     <div class="marquee" aria-hidden="true">
@@ -103,216 +63,162 @@
       </div>
     </div>
 
-    <!-- SKILL TREE -->
-    <section class="section skills" id="skills" data-quest="Unlock the skill tree">
-      <header class="section-head">
-        <p class="kicker">Skills And Tools</p>
-        <h2 class="warp" data-warp>My Design Toolkit</h2>
-      </header>
-      <div class="tree" id="tree">
-        <svg class="tree-lines" id="treeLines" aria-hidden="true"></svg>
-        <div class="tree-root" data-node="root"><img src="images/logo-mark.webp" alt=""><span>Queenie</span></div>
-        <ul class="tree-nodes">
-          <li class="node c-lime"   data-node data-parent="root" style="--x:16;--y:20"><button type="button" data-cursor="Skill">Wireframe</button></li>
-          <li class="node c-lime"   data-node data-parent="root" style="--x:12;--y:54"><button type="button" data-cursor="Skill">Figma</button></li>
-          <li class="node c-lime"   data-node data-parent="root" style="--x:22;--y:86"><button type="button" data-cursor="Skill">Visual Systems</button></li>
-          <li class="node c-cyan"   data-node data-parent="root" style="--x:50;--y:90"><button type="button" data-cursor="Skill">HTML / CSS</button></li>
-          <li class="node c-pink"   data-node data-parent="root" style="--x:80;--y:84"><button type="button" data-cursor="Skill">Interdisciplinary</button></li>
-          <li class="node c-pink"   data-node data-parent="root" style="--x:88;--y:50"><button type="button" data-cursor="Skill">Bilingual</button></li>
-          <li class="node c-pink"   data-node data-parent="root" style="--x:82;--y:18"><button type="button" data-cursor="Skill">Teamwork</button></li>
-        </ul>
-        <p class="tree-status" id="treeStatus" aria-live="polite">0 / 7 unlocked</p>
+    <!-- WORK: pinned, scroll-driven. One .work-title + one .slide per project, in the same order.
+         Each slide sets its own colour (--c) and the colour of the light on the metal (data-tint, r,g,b from 0 to 1).
+         data-shape: 2 pill · 3 bag · 4 ring · 5 shuttlecock · 6 gem · 8 robot arm.
+         To hide a project, add the hidden attribute to BOTH its .work-title and its .slide. -->
+    <section class="work" id="work" aria-label="Selected work">
+      <div class="work-pin" id="workPin">
+        <p class="work-head"><span class="tag">selected work</span><b id="workCount">01</b><i id="workTotal">/ 04</i></p>
+
+        <div class="work-titles">
+          <h2 class="work-title" style="--c:#ff9447">MedEasy</h2>
+          <h2 class="work-title" style="--c:#5c9dff">AirPal</h2>
+          <h2 class="work-title" style="--c:#2ee6cf">ShuttleSync</h2>
+          <h2 class="work-title" style="--c:#e6bb62">Portraits in Motion</h2>
+        </div>
+
+        <article class="slide" style="--c:#ff9447" data-shape="2" data-tint="1,0.5,0.2">
+          <div class="slide-text">
+            <p class="slide-line">A medication app that helps older adults refill prescriptions with confidence.</p>
+            <p class="slide-meta">UI / UX design, individual project, 2025</p>
+            <a class="btn btn-fill" href="#medeasy" data-cursor="Open">View case study</a>
+          </div>
+          <a class="cover" href="#medeasy" data-cursor="Open" aria-label="Open the MedEasy case study">
+            <img class="fade-out" src="images/MedEasy-hold.webp" alt="A hand holding a phone showing the MedEasy app">
+          </a>
+        </article>
+
+        <article class="slide" style="--c:#5c9dff" data-shape="3" data-tint="0.3,0.58,1">
+          <div class="slide-text">
+            <p class="slide-line">A wearable airport companion for first-time solo travellers.</p>
+            <p class="slide-meta">Product and interface design, group project, 2026</p>
+            <a class="btn btn-fill" href="#airpal" data-cursor="Open">View case study</a>
+          </div>
+          <a class="cover" href="#airpal" data-cursor="Open" aria-label="Open the AirPal case study">
+            <img src="images/Airpal-prototype.webp" alt="The AirPal wearable bag prototype with its fold-out screen">
+          </a>
+        </article>
+
+        <article class="slide" style="--c:#2ee6cf" data-shape="5" data-tint="0.15,0.92,0.82">
+          <div class="slide-text">
+            <p class="slide-line">Three devices that help students join casual badminton at their own pace.</p>
+            <p class="slide-meta">Interaction design studio, group project, 2026</p>
+            <a class="btn btn-fill" href="#shuttlesync" data-cursor="Open">View case study</a>
+          </div>
+          <a class="cover" href="#shuttlesync" data-cursor="Open" aria-label="Open the ShuttleSync case study">
+            <img src="images/ShuttleSync-characters.webp" alt="Five animal avatar characters designed for ShuttleSync">
+          </a>
+        </article>
+
+        <article class="slide" style="--c:#e6bb62" data-shape="8" data-tint="0.95,0.72,0.3">
+          <div class="slide-text">
+            <p class="slide-line">One robot arm performs four perfume characters in a shop window.</p>
+            <p class="slide-meta">Robotic interaction, group project, in progress</p>
+            <a class="btn btn-fill" href="#portraits" data-cursor="Open">View work in progress</a>
+          </div>
+          <a class="cover" href="#portraits" data-cursor="Open" aria-label="Open the Portraits in Motion case study">
+            <video src="media/portraits-loop.mp4" poster="images/Portraits-film-poster.webp" muted loop playsinline preload="none" aria-label="A robot arm holding a golden character head"></video>
+          </a>
+        </article>
+
+        <div class="work-index" id="workDots" role="group" aria-label="Jump to a project"></div>
       </div>
     </section>
 
-    <!-- CHARACTER FILE -->
-    <section class="section about" id="about" data-quest="Read the character file">
-      <header class="section-head">
-        <p class="kicker">Position Statement</p>
-        <h2 class="warp" data-warp>About Me</h2>
-      </header>
-      <div class="dossier">
-        <figure class="dossier-portrait">
-          <div class="portrait-frame">
-            <img src="images/me.webp" alt="Portrait photo of Queenie Liu" loading="lazy">
-            <i class="scanline" aria-hidden="true"></i>
-          </div>
-          <figcaption>Queenie / Interaction Design / Sydney</figcaption>
-        </figure>
-        <div class="dossier-body">
-          <dl class="dossier-stats">
-            <div><dt>Name</dt><dd>Ziqi Liu “Queenie”</dd></div>
-            <div><dt>Class</dt><dd>Interaction Design</dd></div>
-            <div><dt>Base</dt><dd>Sydney, Australia</dd></div>
-          </dl>
-          <div class="dossier-bio" id="bio">
-            <p>Hi, my name is Ziqi Liu, and you can call me Queenie. I am a Sydney-based interaction design student who enjoys turning new ideas into clear and visually engaging digital experiences.</p>
-            <p>My practice sits between user research, prototyping, and visual storytelling. I am interested in everyday technologies — from health and travel tools — and how design can make them feel more understandable, supportive, and human.</p>
-            <p>With a background that bridges media, communication, and interaction design, I care not only about how a product looks, but also how it speaks, behaves, and guides people through an experience.</p>
-            <p>I am currently developing my skills in product and interaction design, with a focus on usability, and the connection between technology and visual craft.</p>
-          </div>
-          <ul class="tags">
-            <li>Interaction Design</li><li>UX Research</li><li>Prototyping</li><li>Web Design</li><li>Accessible Interfaces</li>
+    <!-- ABOUT -->
+    <section class="section about" id="about" data-shape="1" data-pos="1.55,0.0,1" data-tint="pink">
+      <div class="about-grid">
+        <div class="about-text">
+          <p class="tag">hello</p>
+          <h2 class="warp" data-warp>About</h2>
+          <p class="about-lead">I’m Ziqi Liu — call me Queenie. I’m a Sydney-based interaction design student working between user research, prototyping and visual storytelling.</p>
+          <p>I care about how a product looks, speaks and guides people, so everyday technology feels understandable and human.</p>
+          <figure class="about-portrait">
+            <img src="images/me.webp" alt="Portrait photo of Queenie Liu at the beach" loading="lazy">
+          </figure>
+        </div>
+        <div class="about-orbit">
+          <ul class="skills" id="skills" aria-label="Skills and tools">
+            <li style="--c:var(--lime)">Wireframe</li>
+            <li style="--c:var(--lime)">Figma</li>
+            <li style="--c:var(--lime)">Visual Systems</li>
+            <li style="--c:var(--cyan)">HTML / CSS</li>
+            <li style="--c:var(--pink)">Interdisciplinary</li>
+            <li style="--c:var(--pink)">Bilingual</li>
+            <li style="--c:var(--pink)">Teamwork</li>
           </ul>
         </div>
       </div>
-
-      <!-- Replaces the old "Design Philosophy" block: results pulled from the CV -->
-      <div class="record">
-        <h3>Track record</h3>
-        <ul>
-          <li><b>Top 10%</b><span>GPA 3.6 in Interaction Design, The University of Sydney, Feb 2025 – present</span></li>
-          <li><b>+30%</b><span>Task completion rate after user testing on MedEasy</span></li>
-          <li><b>72.5</b><span>SUS usability score for AirPal after iteration and testing</span></li>
-          <li><b>HD</b><span>High Distinction for code quality on Waverley Cemetery by the Sea, a responsive website I led the front-end for</span></li>
-        </ul>
-      </div>
+      <ul class="record">
+        <li><b data-count="10" data-prefix="Top " data-suffix="%">Top 10%</b><span>of my Interaction Design cohort at the University of Sydney</span></li>
+        <li><b data-count="30" data-prefix="+" data-suffix="%">+30%</b><span>task completion on MedEasy after user testing</span></li>
+        <li><b data-count="72.5">72.5</b><span>SUS usability score for AirPal</span></li>
+        <li><b>HD</b><span>High Distinction for front-end code quality</span></li>
+      </ul>
     </section>
 
-    <!-- MISSION SELECT -->
-    <section class="section work" id="work" data-quest="Drag the stage and pick a mission">
+    <!-- DRAWINGS -->
+    <section class="section other" id="other-works" data-shape="4" data-pos="1.9,1.1,0.6" data-tint="pink">
       <header class="section-head">
-        <p class="kicker">Selected Work</p>
-        <h2 class="warp" data-warp>Case Studies</h2>
-        <p class="lede">Two selected projects showing how I approach interaction design across accessible digital products and physical-digital service experiences.</p>
-      </header>
-
-      <div class="stage" id="stage" tabindex="0" role="group" aria-roledescription="carousel" aria-label="Case studies. Use left and right arrow keys to rotate.">
-        <div class="stage-floor" aria-hidden="true"></div>
-        <div class="stage-ring" id="ring">
-          <a class="cart c-lime" href="#medeasy" data-index="0" data-cursor="Drag">
-            <span class="cart-label">Case Study 01</span>
-            <img class="cart-art" src="images/MedEasy-hold.webp" alt="" loading="lazy">
-            <img class="cart-shot" src="images/MedEasy-title.webp" alt="MedEasy title" loading="lazy">
-            <strong>MedEasy</strong>
-          </a>
-          <a class="cart c-cyan" href="#airpal" data-index="1" data-cursor="Drag">
-            <span class="cart-label">Case Study 02</span>
-            <img class="cart-art" src="images/Airpal-prototype.webp" alt="" loading="lazy">
-            <img class="cart-shot" src="images/AirPal-title.webp" alt="AirPal title" loading="lazy">
-            <strong>AirPal</strong>
-          </a>
-          <a class="cart c-pink" href="#other-works" data-index="2" data-cursor="Drag">
-            <span class="cart-label">Selected Work 03</span>
-            <img class="cart-shot cart-shot-full" src="images/other-title.webp" alt="other title" loading="lazy">
-            <strong>Other Works</strong>
-          </a>
-        </div>
-        <button class="stage-arrow stage-prev" id="stagePrev" type="button" aria-label="Previous project" data-cursor="Prev">←</button>
-        <button class="stage-arrow stage-next" id="stageNext" type="button" aria-label="Next project" data-cursor="Next">→</button>
-      </div>
-
-      <div class="brief" id="brief" aria-live="polite">
-        <article class="brief-item c-lime is-current" data-index="0">
-          <h3>MedEasy</h3>
-          <p class="brief-role">UI / UX Design</p>
-          <ul class="tags"><li>Health Interface</li><li>Older Adults</li><li>Usability Testing</li><li>Iteration</li></ul>
-          <a class="btn btn-fill" href="#medeasy" data-cursor="Start">Start mission</a>
-        </article>
-        <article class="brief-item c-cyan" data-index="1">
-          <h3>AirPal</h3>
-          <p class="brief-role">Product / Interface Design</p>
-          <ul class="tags"><li>Travel Context</li><li>Physical-Digital</li><li>Scenario Design</li><li>Interface Prompts</li></ul>
-          <a class="btn btn-fill" href="#airpal" data-cursor="Start">Start mission</a>
-        </article>
-        <article class="brief-item c-pink" data-index="2">
-          <h3>Other Works</h3>
-          <p class="brief-role">Some of my drawing works, including ink portraits, colour studies, anatomy-inspired drawing and charcoal texture work.</p>
-          <ul class="tags"><li>Visual Practice</li><li>Drawing</li><li>Material Exploration</li><li>Personal Style</li></ul>
-          <a class="btn btn-fill" href="#other-works" data-cursor="Go">Open the canvas</a>
-        </article>
-      </div>
-    </section>
-
-    <!-- FREE CANVAS -->
-    <section class="section other" id="other-works" data-quest="Throw the drawings around">
-      <header class="section-head">
-        <p class="kicker">Other Works / 2026</p>
+        <p class="tag">drawings, 2026</p>
         <h2 class="warp" data-warp>Visual Experiments</h2>
-        <p class="lede">These works show the more expressive side of my design practice: observation, material testing and emotional image-making.</p>
-        <ul class="tags"><li>Ink</li><li>Pastel</li><li>Charcoal</li><li>Visual Storytelling</li></ul>
+        <p class="lede">The expressive side of my practice: observation, material testing and emotional image-making.</p>
       </header>
-
-      <div class="board-wrap">
-        <div class="board-tools">
-          <span>Drag to move · click to inspect</span>
-          <button type="button" class="hud-btn" id="boardShuffle" data-cursor="Mess">Shuffle</button>
-          <button type="button" class="hud-btn" id="boardTidy" data-cursor="Tidy">Tidy up</button>
-        </div>
-        <div class="board" id="board">
-          <figure class="piece" data-piece="0" tabindex="0" data-cursor="Drag">
-            <img src="images/other1.webp" alt="Monochrome ink portrait studies" draggable="false" loading="lazy">
-            <figcaption>
-              <span class="piece-meta"><span>2026</span><span>Ink Study</span><span>Portrait</span></span>
-              <h3>Fluid Portrait Studies</h3>
-              <p>Exploring identity through loose brush marks, layered faces and imperfect emotional expression.</p>
-            </figcaption>
-          </figure>
-          <figure class="piece" data-piece="1" tabindex="0" data-cursor="Drag">
-            <img src="images/other2.webp" alt="Abstract colour study with organic overlapping shapes" draggable="false" loading="lazy">
-            <figcaption>
-              <span class="piece-meta"><span>2026</span><span>Colour</span><span>Organic Form</span></span>
-              <h3>Organic Colour Study</h3>
-              <p>Testing soft colour transitions, curved forms and the tension between delicate surfaces and strong outlines.</p>
-            </figcaption>
-          </figure>
-          <figure class="piece" data-piece="2" tabindex="0" data-cursor="Drag">
-            <img src="images/other3.webp" alt="Brain pathway illustration on black background" draggable="false" loading="lazy">
-            <figcaption>
-              <span class="piece-meta"><span>2026</span><span>Chalk</span><span>Body / Mind</span></span>
-              <h3>Inside The Mind</h3>
-              <p>A large-scale drawing visualising internal signals, stress and thought pathways through red and blue movement lines.</p>
-            </figcaption>
-          </figure>
-          <figure class="piece" data-piece="3" tabindex="0" data-cursor="Drag">
-            <img src="images/other4.webp" alt="Charcoal drawing of hands against a textured architectural background" draggable="false" loading="lazy">
-            <figcaption>
-              <span class="piece-meta"><span>2026</span><span>Charcoal</span><span>Texture</span></span>
-              <h3>Touch And Surface</h3>
-              <p>Using hand forms and rubbed textures to study touch, spatial memory and material detail.</p>
-            </figcaption>
-          </figure>
-        </div>
-      </div>
+      <ul class="works" id="works">
+        <li><button type="button" class="work-row" data-src="images/other1.webp" data-alt="Monochrome ink portrait studies" data-cursor="View">
+          <span class="work-row-n">01</span><span class="work-row-title">Fluid Portrait Studies</span><span class="work-row-meta">Ink study, portrait</span>
+          <img class="work-row-thumb" src="images/other1.webp" alt="" loading="lazy">
+          <p>Exploring identity through loose brush marks, layered faces and imperfect emotional expression.</p></button></li>
+        <li><button type="button" class="work-row" data-src="images/other2.webp" data-alt="Abstract colour study with organic overlapping shapes" data-cursor="View">
+          <span class="work-row-n">02</span><span class="work-row-title">Organic Colour Study</span><span class="work-row-meta">Colour, organic form</span>
+          <img class="work-row-thumb" src="images/other2.webp" alt="" loading="lazy">
+          <p>Testing soft colour transitions, curved forms and the tension between delicate surfaces and strong outlines.</p></button></li>
+        <li><button type="button" class="work-row" data-src="images/other3.webp" data-alt="Brain pathway illustration on black background" data-cursor="View">
+          <span class="work-row-n">03</span><span class="work-row-title">Inside The Mind</span><span class="work-row-meta">Chalk, body and mind</span>
+          <img class="work-row-thumb" src="images/other3.webp" alt="" loading="lazy">
+          <p>A large-scale drawing visualising internal signals, stress and thought pathways through red and blue movement lines.</p></button></li>
+        <li><button type="button" class="work-row" data-src="images/other4.webp" data-alt="Charcoal drawing of hands against a textured architectural background" data-cursor="View">
+          <span class="work-row-n">04</span><span class="work-row-title">Touch And Surface</span><span class="work-row-meta">Charcoal, texture</span>
+          <img class="work-row-thumb" src="images/other4.webp" alt="" loading="lazy">
+          <p>Using hand forms and rubbed textures to study touch, spatial memory and material detail.</p></button></li>
+      </ul>
+      <div class="peek" id="peek" aria-hidden="true"><img alt=""></div>
     </section>
 
-    <!-- CONTINUE? -->
-    <section class="section contact" id="contact" data-quest="Send a signal">
-      <div class="continue" aria-hidden="true">
-        <span class="continue-word warp" data-warp>Continue?</span>
-        <span class="continue-count" id="countdown">9</span>
-      </div>
-      <div class="contact-body">
-        <p class="kicker">Contact / Links</p>
-        <h2>Let’s Talk About Design And Future Work.</h2>
-        <p class="lede">Open to early-career product and interaction design opportunities. Best contacted by email.</p>
-        <p class="contact-pref">Preferred Contact</p>
-        <button class="mail" id="mailCopy" type="button" data-cursor="Copy" aria-label="Copy email address 54liuzi7@gmail.com">
-          <span>54liuzi7@gmail.com</span>
-        </button>
-        <div class="hero-actions">
-          <a class="btn btn-yellow" href="mailto:54liuzi7@gmail.com" data-cursor="Mail">Email Me</a>
-          <a class="btn" href="CV.pdf" target="_blank" rel="noreferrer" data-cursor="Open">View CV</a>
-          <a class="btn" href="http://www.linkedin.com/in/ziqi-liu-queenie" target="_blank" rel="noreferrer" data-cursor="Open">LinkedIn</a>
-          <a class="btn" href="https://www.instagram.com/6zi7_queenie/" target="_blank" rel="noreferrer" data-cursor="Open">Instagram</a>
-        </div>
-        <p class="contact-loc">Sydney, Australia · 2026</p>
+    <!-- CONTACT -->
+    <section class="section contact" id="contact" data-shape="7" data-pos="1.8,0.1,1.25" data-tint="lime">
+      <a class="badge" href="mailto:54liuzi7@gmail.com" aria-label="Open to work, email me" data-cursor="Mail">
+        <svg viewBox="0 0 200 200" aria-hidden="true"><defs><path id="badgePath" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text><textPath href="#badgePath">open to work ✦ sydney ✦ 2026 ✦ open to work ✦ sydney ✦ 2026 ✦</textPath></text></svg>
+        <span aria-hidden="true">↗</span>
+      </a>
+      <h2 class="warp contact-title iris-text" data-warp>Let’s talk</h2>
+      <p class="lede">Open to early-career product and interaction design opportunities.</p>
+      <button class="mail" id="mailCopy" type="button" data-cursor="Copy" aria-label="Copy email address 54liuzi7@gmail.com">
+        <span>54liuzi7@gmail.com</span>
+      </button>
+      <p class="tag mail-note" id="mailNote" aria-live="polite">click to copy</p>
+      <div class="contact-links">
+        <a class="link" href="mailto:54liuzi7@gmail.com">Email</a>
+        <a class="link" href="CV.pdf" target="_blank" rel="noreferrer">CV</a>
+        <a class="link" href="http://www.linkedin.com/in/ziqi-liu-queenie" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="link" href="https://www.instagram.com/6zi7_queenie/" target="_blank" rel="noreferrer">Instagram</a>
       </div>
     </section>
 
     <footer class="footer">
-      <span>© 2026 [Queenie Liu]</span>
-      <span>Interaction Design Portfolio · Built with HTML / CSS / JS</span>
-      <button type="button" class="coin" id="coin" data-cursor="Play">Insert coin</button>
-      <a href="#top" data-cursor="Up">Back to top ↑</a>
+      <span>© 2026 Queenie Liu, Sydney</span>
+      <button type="button" class="coin" id="coin" title="Hidden mini game">↑↑↓↓←→←→BA</button>
+      <a class="link" href="#top">Back to top</a>
     </footer>
   </main>
 
   <!-- ============ CASE: MEDEASY ============ -->
   <main id="case-medeasy" class="page case c-lime" hidden>
     <aside class="chapters" aria-label="Chapters">
-      <a class="back-link" href="#work" data-cursor="Back">← Back to Work</a>
-      <p class="chapters-title">Mission 01</p>
+      <a class="back-link link" href="#work" data-cursor="Back">← Back to Work</a>
+      <p class="chapters-title">MedEasy</p>
       <ol></ol>
       <div class="chapters-bar"><i></i></div>
     </aside>
@@ -412,8 +318,8 @@
   <!-- ============ CASE: AIRPAL ============ -->
   <main id="case-airpal" class="page case c-cyan" hidden>
     <aside class="chapters" aria-label="Chapters">
-      <a class="back-link" href="#work" data-cursor="Back">← Back to Work</a>
-      <p class="chapters-title">Mission 02</p>
+      <a class="back-link link" href="#work" data-cursor="Back">← Back to Work</a>
+      <p class="chapters-title">AirPal</p>
       <ol></ol>
       <div class="chapters-bar"><i></i></div>
     </aside>
@@ -464,7 +370,7 @@
       </section>
 
       <section class="chapter" data-chapter="Concept">
-        <p class="kicker">02 / Concept</p>
+        <p class="kicker">Act II, Concept</p>
         <h2>Wearable Airport Companion</h2>
         <p class="pull">A physical-digital solution, not just another phone interface.</p>
         <p>AirPal is a crossbody / waist bag with a foldable glanceable screen. It keeps passports, boarding passes, cards and phones close, while providing journey guidance, flight updates, navigation prompts and support options.</p>
@@ -557,9 +463,248 @@
         <p>AirPal helped me understand how physical form and interface design need to work together. My key learning was that in stressful environments, a product should reduce choices, guide one action at a time, and provide reassurance before users feel lost.</p>
       </section>
 
-      <a class="next-case c-pink" href="#other-works" data-cursor="Next">
+      <a class="next-case" href="#shuttlesync" data-cursor="Next">
+        <span>Next Case Study</span>
+        <strong class="warp" data-warp>ShuttleSync</strong>
+        <p>Three devices for casual badminton →</p>
+      </a>
+    </article>
+  </main>
+
+  <!-- ============ CASE: SHUTTLESYNC ============ -->
+  <main id="case-shuttlesync" class="page case" hidden>
+    <aside class="chapters" aria-label="Chapters">
+      <a class="back-link link" href="#work" data-cursor="Back">← Back to Work</a>
+      <p class="chapters-title">ShuttleSync</p>
+      <ol></ol>
+      <div class="chapters-bar"><i></i></div>
+    </aside>
+
+    <article class="case-main">
+      <header class="case-head">
+        <p class="kicker">Case Study 03 / Interaction design studio</p>
+        <h1 class="warp" data-warp>ShuttleSync</h1>
+        <p class="case-intro">A three-device badminton experience that helps socially hesitant students arrive, check in and play together at their own pace.</p>
+        <ul class="tags"><li>Multi-device</li><li>Motion Input</li><li>Inclusive Design</li><li>Usability Testing</li><li>Group Project</li></ul>
+        <div class="hero-art">
+          <img class="case-cover" src="images/ShuttleSync-arena.webp" alt="Illustrated indoor badminton arena from the ShuttleSync shared screen">
+          <img class="cast-img" src="images/ShuttleSync-characters.webp" alt="The five avatar characters: bee, bunny, cat, penguin and turtle">
+        </div>
+      </header>
+
+      <section class="chapter" data-chapter="Overview">
+        <p class="kicker">Overview</p>
+        <h2>From uncertainty to play</h2>
+        <p>Playing casual badminton is not only about finding a court. Students also have to work out where, when and with whom, and whether a session will suit them. ShuttleSync connects private planning on a phone with a shared court-side screen and a racket you swing to play.</p>
+        <dl class="specs">
+          <div><dt>Context</dt><dd>DECO2200 Interaction Design Studio<small>Group of three, The University of Sydney</small></dd></div>
+          <div><dt>My role</dt><dd>Character design, online ethnography, testing materials<small>Shared UI design, coding, iteration and video production with Libra</small></dd></div>
+          <div><dt>Timeline</dt><dd>Semester 2, 2026</dd></div>
+          <div><dt>Built with</dt><dd>React, TypeScript, p5.js, ml5 PoseNet, Node<small>AI-assisted coding with ChatGPT and Claude</small></dd></div>
+        </dl>
+        <a class="btn btn-fill" href="https://shuttlesync-v20-3.onrender.com/" target="_blank" rel="noreferrer" data-cursor="Open">Open the live prototype</a>
+      </section>
+
+      <section class="chapter" data-chapter="Research">
+        <p class="kicker">Act I, Research</p>
+        <h2>Availability is not suitability</h2>
+        <p>We read Reddit threads, observed casual sessions at the Sydney University Sports Centre and compared five existing tools. Each one solved a part of the journey, never the whole experience.</p>
+        <div class="cards cards-4">
+          <div class="card"><h3>Suitability</h3><p>Court access, timing, conditions and group fit all matter.</p></div>
+          <div class="card"><h3>Compatibility</h3><p>Similar skill can still mean different intensity, style or expectations.</p></div>
+          <div class="card"><h3>Tacit knowledge</h3><p>Solo and new players have fewer signals about where to go and who to join.</p></div>
+          <div class="card"><h3>Fragmentation</h3><p>Planning, booking, people and court-side coordination happen separately.</p></div>
+        </div>
+        <p class="pull">How might we connect digital planning with real-time court-side information, so students can decide where, when and with whom to play?</p>
+        <figure class="shot"><figcaption>Journey map</figcaption><img class="zoomable" src="images/ShuttleSync-journey.webp" alt="Journey map from intention to play" loading="lazy"></figure>
+        <figure class="shot"><figcaption>Early sketches</figcaption><img class="zoomable" src="images/ShuttleSync-sketch.webp" alt="Hand-drawn sketches of the shared screen and phone" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Concept">
+        <p class="kicker">02 / Concept</p>
+        <h2>Three devices, three roles</h2>
+        <p>Private decisions, then shared context, then movement-based play.</p>
+        <div class="cards cards-3">
+          <div class="card"><h3>Phone</h3><p>Browse sessions, join solo or as a pair, and get a personal four-digit code.</p></div>
+          <div class="card"><h3>Shared screen</h3><p>Check-in, avatars, warm-up, court call, a seven-round game and results.</p></div>
+          <div class="card"><h3>Racket</h3><p>Your phone becomes the racket: motion input, with a touch fallback.</p></div>
+        </div>
+        <figure class="shot"><figcaption>The final system</figcaption><img class="zoomable" src="images/ShuttleSync-system.webp" alt="Phone, large screen and racket interfaces of the final prototype" loading="lazy"></figure>
+        <figure class="shot is-free"><figcaption>Avatars I designed</figcaption><img src="images/ShuttleSync-characters.webp" alt="Bee, bunny, cat, penguin and turtle avatars" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Testing">
+        <p class="kicker">03 / Testing</p>
+        <h2>What the Testing Fair revealed</h2>
+        <p>24 September 2026. Seven participants in four groups, with five survey responses. People enjoyed the avatar game, and the same session surfaced where the system was hard to follow.</p>
+        <div class="result">
+          <div class="result-score"><h3>Participants</h3><b>7</b><p>in four test groups</p></div>
+          <div class="result-score"><h3>Enjoyment</h3><b>6.0</b><p>out of 7, five responses</p></div>
+          <div class="result-score"><h3>Movement clarity</h3><b>4.6</b><p>out of 7, five responses</p></div>
+        </div>
+        <ol class="steps">
+          <li><h3>Tracking</h3><p>Movement lagged behind players, so we moved to upper-body tracking with clearer status cues.</p></li>
+          <li><h3>Discoverability</h3><p>Some shakes and body movements were missed, so we added a guided Move, Wave and Swing practice with touch controls.</p></li>
+          <li><h3>Identity</h3><p>Two participants picked the same character, so we added player slots and a character lock.</p></li>
+          <li><h3>Device handoff</h3><p>The roles of phone, screen and racket were unclear, so check-in became a personal four-digit code with explicit P1 and P2 status.</p></li>
+          <li><h3>Group changes</h3><p>Leaving mid-session was unfinished, so we designed Find a player, Wait 5 minutes and I’m back.</p></li>
+        </ol>
+        <figure class="shot"><figcaption>Before and after</figcaption><img class="zoomable" src="images/ShuttleSync-changes.webp" alt="Before and after screens for connecting, movement and group changes" loading="lazy"></figure>
+        <figure class="shot"><figcaption>Survey means, 1 to 7</figcaption><img class="zoomable" src="images/ShuttleSync-survey.webp" alt="Bar chart of survey means" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Inclusive design">
+        <p class="kicker">04 / Inclusive design</p>
+        <h2>Designing for social hesitation</h2>
+        <p>We focused on students who want to join casual badminton but hesitate around unfamiliar people. The goal was to make arrival predictable and participation controllable.</p>
+        <div class="cards cards-3">
+          <div class="card"><h3>What to Expect</h3><p>Phone guidance: arrive, check in privately, join at your own pace.</p></div>
+          <div class="card"><h3>Your Comfort</h3><p>Quiet alerts and less motion, controlled by each player.</p></div>
+          <div class="card"><h3>Shared avatar play</h3><p>A playful common activity on the big screen as a lighter first step.</p></div>
+        </div>
+        <figure class="shot is-free"><img class="zoomable" src="images/ShuttleSync-phone.webp" alt="What to Expect and Your Comfort phone screens" loading="lazy"></figure>
+        <p class="fineprint">This is a design rationale. Whether it works for hesitant players still needs more evidence from real users.</p>
+      </section>
+
+      <a class="next-case" href="#portraits" data-cursor="Next">
+        <span>Next Case Study</span>
+        <strong class="warp" data-warp>Portraits in Motion</strong>
+        <p>A robot arm performs in a shop window →</p>
+      </a>
+    </article>
+  </main>
+
+  <!-- ============ CASE: PORTRAITS IN MOTION ============ -->
+  <main id="case-portraits" class="page case" hidden>
+    <div class="curtain curtain-l" aria-hidden="true"></div><div class="curtain curtain-r" aria-hidden="true"></div>
+    <aside class="chapters" aria-label="Chapters">
+      <a class="back-link link" href="#work" data-cursor="Back">← Back to Work</a>
+      <p class="chapters-title">Portraits in Motion</p>
+      <ol></ol>
+      <div class="chapters-bar"><i></i></div>
+    </aside>
+
+    <article class="case-main">
+      <header class="case-head">
+        <p class="kicker">A shop-window drama in four characters</p>
+        <h1>Portraits <em>in Motion</em></h1>
+        <p class="case-intro">A shop-window performance in which one Universal Robot arm plays four Penhaligon’s Portraits characters. Knock on the door, and the dinner party falls apart.</p>
+        <ul class="tags"><li>Robotics</li><li>Retail Experience</li><li>Speculative Design</li><li>Choreography</li><li>Group Project</li></ul>
+        <figure class="stage">
+          <video controls playsinline preload="none" poster="images/Portraits-film-poster.webp" src="media/portraits-film.mp4"></video>
+          <figcaption>The performance, filmed in the robotics lab. Three minutes, with sound.</figcaption>
+        </figure>
+      </header>
+
+      <section class="chapter" data-chapter="Overview">
+        <p class="kicker">Prologue</p>
+        <h2>What if a shop window performed its characters instead of displaying them?</h2>
+        <p>Penhaligon’s Portraits collection gives each perfume a fictional aristocrat with secrets and scandals. Our concept turns the shop window into a small public theatre, where a single robot arm becomes each character in turn.</p>
+        <dl class="specs">
+          <div><dt>Context</dt><dd>DECO2021 group project<small>The University of Sydney</small></dd></div>
+          <div><dt>Team</dt><dd>Maggie, Queenie, Libra, Tinghui</dd></div>
+          <div><dt>Timeline</dt><dd>Semester 2, 2026<small>In progress</small></dd></div>
+          <div><dt>Tools</dt><dd>Universal Robots arm, OnRobot RG6 gripper, 3D-printed props</dd></div>
+        </dl>
+        <p class="fineprint">A speculative student brief. Not commissioned by or affiliated with Penhaligon’s.</p>
+      </section>
+
+      <section class="chapter" data-chapter="Research">
+        <p class="kicker">01 / Research</p>
+        <h2>Scent Futures</h2>
+        <p>The project began with my individual research into robots, retail and the invisible language of smell. One question guided it: what if perfume retail shifted from displaying finished products to creating live, personal scent experiences?</p>
+        <div class="cards cards-3">
+          <div class="card"><h3>Personalisation</h3><p>A window that senses a passer-by and mixes a scent before they enter the store.</p><p class="tension">Personalisation ↔ Surveillance</p></div>
+          <div class="card"><h3>Machine / Performance</h3><p>A robot arm makes perfume in full view of the street, so the making becomes the show.</p><p class="tension">Craftsmanship ↔ Automation</p></div>
+          <div class="card"><h3>Aesthetic</h3><p>Scent drifts beyond the storefront and becomes part of the street’s atmosphere.</p><p class="tension">Atmospheric care ↔ Behavioural manipulation</p></div>
+        </div>
+        <figure class="shot"><figcaption>Research collage</figcaption><img class="zoomable" src="images/Portraits-research.webp" alt="Scent Futures research collage with three propositions" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Concept">
+        <p class="kicker">02 / Concept</p>
+        <h2>One mechanical actor, four identities</h2>
+        <p class="pull">If the same machine can become four personalities, where does brand character live: in the object, the story, or the behaviour?</p>
+        <p>A display shows the character. A human actor performs it. A robot performs personality while remaining visibly a programmable machine.</p>
+        <ul class="chips">
+          <li>Same body</li><li>+ Different mask</li><li>+ Different timing</li><li>+ Different trajectory</li><li>= Different perceived personality</li>
+        </ul>
+        <figure class="shot"><img class="zoomable" src="images/Portraits-whatif.webp" alt="What if slide" loading="lazy"></figure>
+        <dl class="cast" aria-label="Cast">
+          <div><dt><b>Lord George</b>the Stag</dt><dd>Head of the family. Rich, noble, deceptive.</dd></div>
+          <div><dt><b>Duchess Rose</b>the Fox</dt><dd>George’s daughter. Coy, full of secrets.</dd></div>
+          <div><dt><b>The Duke</b>the Hound</dt><dd>Married to Rose. A dramatic dandy.</dd></div>
+          <div><dt><b>Terrible Teddy</b>the Rhino</dt><dd>The outsider. Smooth, dangerous, persistent.</dd></div>
+          <div><dt><b>All four</b>played by</dt><dd>One Universal Robots arm</dd></div>
+        </dl>
+        <figure class="shot"><img class="zoomable" src="images/Portraits-characters.webp" alt="The four characters: Lord George the stag, Duchess Rose the fox, the Duke the hound, Terrible Teddy the rhino" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Interaction">
+        <p class="kicker">Act III, Interaction</p>
+        <h2>A simple knock, a different ending</h2>
+        <p>A brass door knocker on the window is the only input. It invites passers-by to trigger the story.</p>
+        <ol class="steps">
+          <li><h3>01 Input detected</h3><p>A sensor picks up the knock.</p></li>
+          <li><h3>02 Teddy arrives</h3><p>The robot picks up Terrible Teddy’s head.</p></li>
+          <li><h3>03 Dinner is interrupted</h3><p>The performance begins and the story unfolds.</p></li>
+          <li><h3>04 Reset</h3><p>The scene resets, ready for the next visitor.</p></li>
+        </ol>
+        <figure class="shot"><img class="zoomable" src="images/Portraits-knock.webp" alt="The audience opens the door: knock interaction flow" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Story">
+        <p class="kicker">Act IV, Story</p>
+        <h2>The eve of the wedding</h2>
+        <p>A speculative prequel inspired by the characters’ existing relationships, not official canon.</p>
+        <ol class="steps steps-2">
+          <li><h3>The perfect dinner</h3><p>Lord George hosts a refined dinner for Duchess Rose and the Duke. Everything appears calm and proper.</p></li>
+          <li><h3>The knock</h3><p>A sudden knock breaks the calm and the table falls silent.</p></li>
+          <li><h3>Teddy arrives</h3><p>Terrible Teddy enters uninvited, and ceremony turns to unease.</p></li>
+          <li><h3>The Duke freezes</h3><p>At the sight of Teddy the Duke falters, charged with recognition.</p></li>
+          <li><h3>Rose understands</h3><p>Rose notices the Duke’s reaction. What was hidden becomes impossible to ignore.</p></li>
+          <li><h3>George intervenes</h3><p>George steps in to preserve the wedding arrangement.</p></li>
+          <li><h3>Rose chooses</h3><p>She turns away from the marriage and leaves.</p></li>
+          <li><h3>Aftermath</h3><p>Rose is gone, George keeps his order, and the Duke finally faces Teddy.</p></li>
+        </ol>
+        <figure class="shot"><img class="zoomable" src="images/Portraits-story.webp" alt="Storyboard of eight scenes" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Choreography">
+        <p class="kicker">Act V, Choreography</p>
+        <h2>Movement makes the relationships visible</h2>
+        <p>Brand values are translated into behaviour: establishment becomes order, provocation becomes intrusion, and scandal emerges through changing distance and timing.</p>
+        <div class="cards cards-4">
+          <div class="card"><h3>Order</h3><p>Even spacing, slow movement, long deliberate pauses.</p><p class="tension">Establishment / Control</p></div>
+          <div class="card"><h3>Intrusion</h3><p>Teddy approaches directly and the formal rhythm is interrupted.</p><p class="tension">Provocation / Disruption</p></div>
+          <div class="card"><h3>Tension</h3><p>The Duke withdraws. Pauses grow longer and less predictable.</p><p class="tension">Scandal / Revelation</p></div>
+          <div class="card"><h3>Break</h3><p>Rose turns outward and the symmetry disappears.</p><p class="tension">Choice / Defiance</p></div>
+        </div>
+        <figure class="shot"><img class="zoomable" src="images/Portraits-choreography.webp" alt="Choreography as storytelling" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Prototype">
+        <p class="kicker">Act VI, Prototype</p>
+        <h2>Where the prototype stands</h2>
+        <div class="cards cards-3">
+          <div class="card"><h3>Planned robot performance</h3><p>Four character routines, one prop held at a time, with a common grip stem added to each head before printing.</p></div>
+          <div class="card"><h3>Staged for filming</h3><p>Manual prop changes between takes. An operator starts the routine after a knock; sound and lighting are edited in.</p></div>
+          <div class="card"><h3>Future integration</h3><p>Live knock sensing, automated character-box doors, automatic prop retrieval and one continuous performance.</p></div>
+        </div>
+        <figure class="shot"><img class="zoomable" src="images/Portraits-scope.webp" alt="Prototype scope with four character head models" loading="lazy"></figure>
+        <figure class="shot"><img class="zoomable" src="images/Portraits-models.webp" alt="Model review and test plan" loading="lazy"></figure>
+      </section>
+
+      <section class="chapter" data-chapter="Next">
+        <p class="kicker">Epilogue</p>
+        <h2>What comes next</h2>
+        <p>The four heads are printed and gilded and the routines have been filmed, as the film at the top of this page shows. Still ahead: live knock sensing, automatic prop changes and one continuous four-character performance.</p>
+        <p class="fineprint">Concept visualisations were generated with ChatGPT from prompts written by the team. Character and brand references belong to Penhaligon’s.</p>
+      </section>
+
+      <a class="next-case" href="#other-works" data-cursor="Next">
         <span>Next / More Work</span>
-        <strong class="warp" data-warp>Other Works</strong>
+        <strong>Other Works</strong>
         <p>2026 visual experiments and personal practice →</p>
       </a>
     </article>
@@ -589,7 +734,7 @@
 
   <div class="glitch-wipe" id="wipe" aria-hidden="true"></div>
 
-  <script src="js/blob.js"></script>
+  <script src="js/metal.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
